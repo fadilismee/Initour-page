@@ -1,0 +1,1070 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INI TOUR - Umroh & Wisata Muslim</title>
+  <style>
+    :root {
+      --brand-green: #74a915;
+      --brand-lime: #b7df18;
+      --brand-yellow: #ffe500;
+      --brand-orange: #ff8a00;
+      --dark: #21330d;
+      --dark-2: #3f5f13;
+      --text: #263118;
+      --muted: #68764d;
+      --soft: #fffdf1;
+      --soft-2: #f5ffd9;
+      --white: #ffffff;
+      --line: rgba(116, 169, 21, .20);
+      --shadow: 0 18px 46px rgba(33, 51, 13, .14);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 6%, rgba(255, 229, 0, .30), transparent 30%),
+        radial-gradient(circle at 98% 16%, rgba(255, 138, 0, .18), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(183, 223, 24, .20), transparent 35%),
+        linear-gradient(180deg, var(--soft) 0%, #ffffff 48%, var(--soft-2) 100%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 14px 96px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .82);
+      box-shadow: 0 12px 34px rgba(33, 51, 13, .10);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 56px;
+      height: 56px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid rgba(116, 169, 21, .12);
+      box-shadow: 0 10px 24px rgba(33, 51, 13, .12);
+      overflow: hidden;
+    }
+
+    .brand-logo img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--dark);
+    }
+
+    .brand-subtitle {
+      margin-top: 3px;
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 170px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav {
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--dark-2);
+      padding: 10px 11px;
+      border-radius: 999px;
+    }
+
+    .nav a:hover {
+      background: #f3ffd1;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 13px 16px;
+      border: 0;
+      border-radius: 16px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.1;
+      cursor: pointer;
+      transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+      user-select: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: .94;
+    }
+
+    .btn-primary {
+      color: #17270a;
+      background: linear-gradient(135deg, #eaff75, var(--brand-lime) 48%, var(--brand-green));
+      box-shadow: 0 14px 28px rgba(116, 169, 21, .24);
+    }
+
+    .btn-orange {
+      color: #271800;
+      background: linear-gradient(135deg, var(--brand-yellow), #ffbd21 48%, var(--brand-orange));
+      box-shadow: 0 14px 28px rgba(255, 138, 0, .22);
+    }
+
+    .btn-dark {
+      color: #fffbe8;
+      background: linear-gradient(135deg, var(--dark), var(--dark-2));
+    }
+
+    .btn-ghost {
+      color: var(--dark);
+      background: rgba(255, 255, 255, .78);
+      border: 1px solid var(--line);
+    }
+
+    .topbar .btn {
+      min-height: 44px;
+      padding: 12px 14px;
+      border-radius: 15px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      color: #fff;
+      background:
+        radial-gradient(circle at 84% 16%, rgba(255, 229, 0, .33), transparent 30%),
+        radial-gradient(circle at 12% 86%, rgba(183, 223, 24, .24), transparent 35%),
+        linear-gradient(135deg, rgba(33, 51, 13, .98), rgba(63, 95, 19, .95) 58%, rgba(255, 138, 0, .90));
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -70px -120px auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255, 229, 0, .13);
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      padding: 26px 18px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .13);
+      border: 1px solid rgba(255, 255, 255, .22);
+      color: #fffde4;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(34px, 8vw, 66px);
+      line-height: .99;
+      letter-spacing: -1.8px;
+      font-weight: 950;
+    }
+
+    .hero h1 span {
+      color: var(--brand-yellow);
+    }
+
+    .hero-lead {
+      max-width: 670px;
+      margin: 16px 0 0;
+      color: rgba(255, 255, 255, .88);
+      font-size: 16px;
+      line-height: 1.68;
+    }
+
+    .hero-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 22px;
+      max-width: 540px;
+    }
+
+    .hero-note {
+      margin-top: 12px;
+      color: rgba(255, 255, 255, .72);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .hero-panel {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-card {
+      border-radius: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .18);
+      backdrop-filter: blur(8px);
+    }
+
+    .mini-card strong {
+      display: block;
+      color: #fff568;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .mini-card span {
+      display: block;
+      color: rgba(255, 255, 255, .82);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .section {
+      padding: 28px 0 0;
+    }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #f3ffd1;
+      border: 1px solid var(--line);
+      color: var(--dark-2);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .section h2 {
+      margin: 0;
+      color: var(--dark);
+      font-size: clamp(24px, 5vw, 40px);
+      line-height: 1.12;
+      letter-spacing: -.6px;
+      font-weight: 950;
+    }
+
+    .section-desc {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-3,
+    .grid-4,
+    .grid-2 {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, .88);
+      box-shadow: 0 12px 32px rgba(33, 51, 13, .08);
+    }
+
+    .card-pad {
+      padding: 17px;
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      margin-bottom: 12px;
+      color: #2d3c0d;
+      background: linear-gradient(135deg, var(--brand-yellow), #dff44a 48%, #ff9a16);
+      box-shadow: 0 10px 24px rgba(255, 138, 0, .14);
+      font-size: 21px;
+    }
+
+    .card h3 {
+      margin: 0 0 7px;
+      color: var(--dark);
+      font-size: 17px;
+      line-height: 1.32;
+      font-weight: 950;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
+    .trust-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .trust-item {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    .trust-label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .trust-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--dark);
+      font-size: 13px;
+      font-weight: 950;
+      word-break: break-word;
+    }
+
+    .notice {
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 20px;
+      background: #fff8cf;
+      border: 1px solid rgba(255, 138, 0, .22);
+      color: #5d4a00;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 2px 0 12px;
+      scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--dark-2);
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      color: #17270a;
+      border-color: rgba(116, 169, 21, .28);
+      background: linear-gradient(135deg, #eaff75, var(--brand-lime));
+    }
+
+    .package-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .package-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .chip {
+      flex: 0 0 auto;
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #f3ffd1;
+      color: var(--dark-2);
+      font-size: 11px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin: 14px 0 16px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: flex;
+      gap: 8px;
+      color: #536139;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .list li::before {
+      content: "✓";
+      flex: 0 0 20px;
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--dark);
+      background: #eaff75;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .package-card .btn {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .9);
+    }
+
+    .step-num {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--dark), var(--dark-2));
+      color: var(--brand-yellow);
+      font-weight: 950;
+    }
+
+    .step h3 {
+      margin: 0 0 5px;
+      color: var(--dark);
+      font-size: 16px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .quote {
+      padding: 22px;
+      border-radius: var(--radius-xl);
+      color: #fff;
+      background:
+        radial-gradient(circle at 90% 20%, rgba(255, 229, 0, .22), transparent 28%),
+        linear-gradient(135deg, var(--dark), var(--dark-2) 62%, var(--brand-orange));
+      box-shadow: var(--shadow);
+    }
+
+    .quote strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand-yellow);
+      font-size: clamp(22px, 5vw, 34px);
+      line-height: 1.15;
+    }
+
+    .quote p {
+      max-width: 780px;
+      margin: 0;
+      color: rgba(255, 255, 255, .86);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .faq {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .faq button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 0;
+      background: transparent;
+      padding: 16px;
+      color: var(--dark);
+      font-size: 15px;
+      font-weight: 950;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .faq .plus {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #f3ffd1;
+      color: var(--dark-2);
+      font-size: 19px;
+      transition: transform .2s ease;
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .25s ease;
+    }
+
+    .faq-content p {
+      margin: 0;
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .faq.active .plus {
+      transform: rotate(45deg);
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-link {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      min-height: 48px;
+      padding: 12px 13px;
+      border-radius: 16px;
+      text-decoration: none;
+      background: #f7ffd8;
+      border: 1px solid rgba(116, 169, 21, .13);
+      color: var(--dark);
+      font-size: 14px;
+      font-weight: 850;
+      word-break: break-word;
+    }
+
+    .footer {
+      padding: 26px 0 10px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .sticky-cta {
+      position: fixed;
+      left: 50%;
+      bottom: 14px;
+      z-index: 50;
+      width: min(100% - 24px, 560px);
+      transform: translateX(-50%);
+      display: grid;
+      grid-template-columns: 1fr 54px;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 38px rgba(33, 51, 13, .20);
+      backdrop-filter: blur(12px);
+    }
+
+    .sticky-cta .btn {
+      width: 100%;
+      min-height: 52px;
+    }
+
+    .back-top {
+      display: none;
+      width: 54px;
+      height: 52px;
+      border-radius: 16px;
+      border: 0;
+      color: #fffbe8;
+      background: linear-gradient(135deg, var(--dark), var(--dark-2));
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .back-top.show {
+      display: block;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (min-width: 640px) {
+      .page {
+        padding: 22px 20px 110px;
+      }
+
+      .hero-inner {
+        padding: 38px 30px;
+      }
+
+      .hero-actions {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-actions .btn-primary {
+        grid-column: 1 / -1;
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust-box {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .nav {
+        display: flex;
+      }
+
+      .brand-subtitle {
+        max-width: 260px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1.35fr .65fr;
+        align-items: end;
+        padding: 52px 42px;
+      }
+
+      .hero-actions {
+        grid-template-columns: auto auto;
+      }
+
+      .hero-actions .btn-primary {
+        grid-column: auto;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .contact-card {
+        grid-template-columns: .9fr 1.1fr;
+        align-items: start;
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" id="top">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="INI TOUR">
+        <span class="brand-logo">
+          <img alt="Logo INI TOUR" src="data:image/png;base64,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">
+        </span>
+        <span>
+          <span class="brand-title">INI TOUR</span>
+          <span class="brand-subtitle">Umroh & Wisata Muslim</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navigasi utama">
+        <a href="#program">Program</a>
+        <a href="#legalitas">Legalitas</a>
+        <a href="#alur">Alur</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="btn btn-primary js-wa" data-text="Assalamu'alaikum INI TOUR, saya ingin konsultasi umroh." href="#">WhatsApp</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="badge-row">
+            <span class="badge">✓ PPIU Resmi</span>
+            <span class="badge">✓ Kantor Jakarta Timur</span>
+            <span class="badge">✓ Konsultasi Gratis</span>
+          </div>
+          <h1>Umroh pertama? <span>Jangan berangkat dalam keadaan bingung.</span></h1>
+          <p class="hero-lead">INI TOUR membantu Anda memahami biaya, jadwal, fasilitas, manasik, dokumen, dan alur keberangkatan dengan penjelasan yang tenang, jelas, dan mudah dipahami.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary js-wa" data-text="Assalamu'alaikum INI TOUR, saya ingin dibantu memilih program umroh yang cocok." href="#">💬 Konsultasi Program</a>
+            <a class="btn btn-orange js-wa" data-text="Assalamu'alaikum, saya ingin lihat jadwal dan biaya umroh terbaru INI TOUR." href="#">📅 Lihat Jadwal & Biaya</a>
+          </div>
+          <p class="hero-note">Tidak harus langsung daftar. Anda boleh bertanya dulu sampai benar-benar paham.</p>
+        </div>
+
+        <div class="hero-panel">
+          <div class="mini-card"><strong>Your Comfort, Our Priority</strong><span>Kenyamanan jamaah menjadi prioritas dalam setiap tahapan layanan.</span></div>
+          <div class="mini-card"><strong>Bimbingan Ibadah</strong><span>Manasik dan arahan perjalanan agar jamaah lebih siap menjalani umroh.</span></div>
+          <div class="mini-card"><strong>Transparan</strong><span>Hotel, maskapai, fasilitas, dan biaya dijelaskan sebelum Anda mengambil keputusan.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="masalah">
+      <div class="section-head">
+        <span class="eyebrow">Masalah calon jamaah</span>
+        <h2>Banyak yang ingin umroh, tapi masih ragu karena belum paham prosesnya.</h2>
+        <p class="section-desc">Landing page ini dibuat untuk menjawab keraguan awal: aman atau tidak, resmi atau tidak, biayanya apa saja, dan nanti di Tanah Suci harus bagaimana.</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="card card-pad"><div class="icon">?</div><h3>“Nanti di sana harus ngapain?”</h3><p>Kami bantu dengan arahan manasik dan penjelasan teknis perjalanan agar Anda tidak merasa sendirian.</p></article>
+        <article class="card card-pad"><div class="icon">💳</div><h3>“Biayanya apa saja?”</h3><p>Tim menjelaskan komponen paket, fasilitas, DP, pelunasan, dan pilihan keberangkatan yang tersedia.</p></article>
+        <article class="card card-pad"><div class="icon">🧭</div><h3>“Takut salah pilih travel.”</h3><p>Legalitas, kantor, kontak, dan alur layanan dibuat jelas agar calon jamaah bisa menilai dengan tenang.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="legalitas">
+      <div class="section-head">
+        <span class="eyebrow">Trust & legalitas</span>
+        <h2>Travel resmi, alamat jelas, dan bisa dikonsultasikan langsung.</h2>
+        <p class="section-desc">Sebelum memilih travel umroh, legalitas dan kejelasan kantor adalah titik awal yang wajib dicek.</p>
+      </div>
+      <div class="card card-pad">
+        <div class="trust-box">
+          <div class="trust-item"><span class="trust-label">Izin PPIU</span><span class="trust-value">11042300019380001</span></div>
+          <div class="trust-item"><span class="trust-label">NIB</span><span class="trust-value">1104230001938</span></div>
+          <div class="trust-item"><span class="trust-label">Akta Pendirian</span><span class="trust-value">AHU-0027827.AH.01.01 Tahun 2023</span></div>
+          <div class="trust-item"><span class="trust-label">Domisili Kantor</span><span class="trust-value">Duren Sawit, Jakarta Timur</span></div>
+        </div>
+        <div class="notice"><strong>Catatan penting:</strong> hotel, maskapai, harga, pembimbing, dan jadwal dapat berubah mengikuti ketersediaan serta ketentuan pemerintah Indonesia dan Arab Saudi. Selalu minta update terbaru ke admin sebelum transfer atau mengambil keputusan.</div>
+      </div>
+    </section>
+
+    <section class="section" id="program">
+      <div class="section-head">
+        <span class="eyebrow">Program INI TOUR</span>
+        <h2>Pilih kebutuhan Anda.</h2>
+        <p class="section-desc">Semua tombol diarahkan ke WhatsApp agar admin bisa memberi penjelasan sesuai kondisi Anda.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Filter program">
+        <button class="tab-btn active" data-filter="all" type="button">Semua</button>
+        <button class="tab-btn" data-filter="umroh" type="button">Umroh</button>
+        <button class="tab-btn" data-filter="private" type="button">Private</button>
+        <button class="tab-btn" data-filter="mitra" type="button">Kemitraan</button>
+      </div>
+
+      <div class="grid grid-3" id="programGrid">
+        <article class="card card-pad package-card" data-category="umroh">
+          <div class="package-top"><h3>Umroh Reguler</h3><span class="chip">Paling Dicari</span></div>
+          <p>Cocok untuk jamaah yang ingin berangkat bersama rombongan dengan jadwal dan fasilitas yang sudah disiapkan.</p>
+          <ul class="list"><li>Informasi jadwal keberangkatan</li><li>Penjelasan hotel, maskapai, dan perlengkapan</li><li>Manasik dan pendampingan ibadah</li></ul>
+          <a class="btn btn-dark js-wa" data-text="Assalamu'alaikum, saya ingin info Umroh Reguler INI TOUR." href="#">Tanya Umroh Reguler</a>
+        </article>
+
+        <article class="card card-pad package-card" data-category="private">
+          <div class="package-top"><h3>Umroh Keluarga / Komunitas</h3><span class="chip">Private</span></div>
+          <p>Untuk keluarga, majelis, komunitas, atau rombongan yang ingin perjalanan lebih tertata.</p>
+          <ul class="list"><li>Konsultasi kebutuhan rombongan</li><li>Diskusi jadwal dan fasilitas</li><li>Cocok untuk keluarga atau komunitas</li></ul>
+          <a class="btn btn-dark js-wa" data-text="Assalamu'alaikum, saya ingin konsultasi Umroh Keluarga atau Komunitas." href="#">Konsultasi Rombongan</a>
+        </article>
+
+        <article class="card card-pad package-card" data-category="mitra">
+          <div class="package-top"><h3>Kemitraan & B2B</h3><span class="chip">Untuk Mitra</span></div>
+          <p>Untuk agen, komunitas, atau travel yang ingin bekerja sama dalam layanan umroh dan kebutuhan perjalanan.</p>
+          <ul class="list"><li>Paket umroh untuk mitra</li><li>Dukungan operasional jamaah</li><li>Peluang kerja sama travel dan komunitas</li></ul>
+          <a class="btn btn-dark js-wa" data-text="Assalamu'alaikum, saya ingin tanya program kemitraan atau B2B INI TOUR." href="#">Tanya Kemitraan</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="quote">
+        <strong>Tenang itu mahal saat umroh.</strong>
+        <p>Karena umroh bukan sekadar berangkat. Ini perjalanan ibadah yang perlu disiapkan dengan benar, dibimbing dengan baik, dan dijalani dengan hati yang tenang.</p>
+      </div>
+    </section>
+
+    <section class="section" id="keunggulan">
+      <div class="section-head">
+        <span class="eyebrow">Alasan memilih kami</span>
+        <h2>Layanan dibuat untuk mengurangi kebingungan jamaah.</h2>
+      </div>
+      <div class="grid grid-4">
+        <article class="card card-pad"><div class="icon">🕋</div><h3>Bimbingan ibadah</h3><p>Jamaah dibantu memahami rangkaian ibadah dan teknis perjalanan.</p></article>
+        <article class="card card-pad"><div class="icon">📍</div><h3>Kantor jelas</h3><p>Alamat kantor berada di Duren Sawit, Jakarta Timur.</p></article>
+        <article class="card card-pad"><div class="icon">💬</div><h3>Mudah konsultasi</h3><p>Calon jamaah bisa bertanya melalui WhatsApp sebelum daftar.</p></article>
+        <article class="card card-pad"><div class="icon">🤝</div><h3>Private & B2B</h3><p>Meliputi keluarga, komunitas, agen, dan kerja sama travel.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="alur">
+      <div class="section-head">
+        <span class="eyebrow">Alur pendaftaran</span>
+        <h2>Mulai dari bertanya dulu juga tidak masalah.</h2>
+      </div>
+      <div class="timeline">
+        <div class="step"><div class="step-num">1</div><div><h3>Klik WhatsApp</h3><p>Sampaikan kebutuhan Anda: sendiri, keluarga, rombongan, atau ingin menjadi mitra.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div><h3>Konsultasi jadwal & biaya</h3><p>Admin menjelaskan pilihan program, fasilitas, dan alur pembayaran secara bertahap.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div><h3>Lengkapi data & dokumen</h3><p>Setelah cocok, Anda akan diarahkan untuk proses pendaftaran dan kelengkapan dokumen.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div><h3>Manasik & persiapan</h3><p>Jamaah dipersiapkan agar lebih paham rangkaian ibadah dan teknis perjalanan.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="section-head">
+        <span class="eyebrow">FAQ</span>
+        <h2>Pertanyaan yang sering ditanyakan.</h2>
+      </div>
+      <div class="grid">
+        <div class="faq"><button type="button">Apakah bisa konsultasi dulu tanpa daftar?<span class="plus">+</span></button><div class="faq-content"><p>Bisa. Anda boleh bertanya jadwal, biaya, fasilitas, dan alur pendaftaran terlebih dahulu.</p></div></div>
+        <div class="faq"><button type="button">Apakah ada manasik?<span class="plus">+</span></button><div class="faq-content"><p>Ada. Tim akan menginformasikan teknis manasik sesuai program keberangkatan yang dipilih.</p></div></div>
+        <div class="faq"><button type="button">Apakah bisa untuk keluarga atau komunitas?<span class="plus">+</span></button><div class="faq-content"><p>Bisa. Silakan konsultasikan jumlah peserta, waktu keberangkatan, dan kebutuhan fasilitas.</p></div></div>
+        <div class="faq"><button type="button">Apakah harga bisa berubah?<span class="plus">+</span></button><div class="faq-content"><p>Bisa berubah mengikuti ketersediaan hotel, maskapai, kebijakan pemerintah, dan ketentuan terkait perjalanan.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="kontak">
+      <div class="contact-card">
+        <div>
+          <span class="eyebrow">Hubungi INI TOUR</span>
+          <h2 style="margin:12px 0 8px;">Siap dibantu pilih program yang cocok?</h2>
+          <p class="section-desc">Kantor kami berada di Jakarta Timur. Silakan hubungi admin untuk konsultasi program terbaru.</p>
+        </div>
+        <div class="contact-links">
+          <a class="contact-link js-wa" data-text="Assalamu'alaikum INI TOUR, saya ingin konsultasi umroh." href="#">💬 WhatsApp: 0859-2324-2520</a>
+          <a class="contact-link" href="tel:02148672528">☎ Telepon: (021) 48672528</a>
+          <a class="contact-link" href="mailto:initour.indowisata@gmail.com">✉ initour.indowisata@gmail.com</a>
+          <a class="contact-link" href="https://www.google.com/maps/search/?api=1&query=Jl.%20Delima%20Raya%20No.%203A%20Malaka%20Sari%20Duren%20Sawit%20Jakarta%20Timur" target="_blank" rel="noopener">📍 Jl. Delima Raya No. 3A, Malaka Sari, Duren Sawit, Jakarta Timur</a>
+          <a class="contact-link" href="https://www.instagram.com/initourindo/" target="_blank" rel="noopener">📷 Instagram: @initourindo</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <strong>INI TOUR Indowisata</strong><br>
+      Your Comfort, Our Priority<br>
+      Umroh • Wisata Muslim • Private • Kemitraan B2B<br>
+      © <span id="year"></span> INI TOUR. All rights reserved.
+    </footer>
+  </main>
+
+  <div class="sticky-cta">
+    <a class="btn btn-primary js-wa" data-text="Assalamu'alaikum INI TOUR, saya ingin dibantu memilih program umroh yang cocok." href="#">💬 Tanya Program yang Cocok</a>
+    <button class="back-top" id="backTop" type="button" aria-label="Kembali ke atas">↑</button>
+  </div>
+
+  <script>
+    const CONFIG = {
+      whatsappNumber: "6285923242520"
+    };
+
+    function buildWhatsAppLink(text) {
+      return "https://wa.me/" + CONFIG.whatsappNumber + "?text=" + encodeURIComponent(text);
+    }
+
+    document.querySelectorAll(".js-wa").forEach(function(link) {
+      const text = link.getAttribute("data-text") || "Assalamu'alaikum INI TOUR, saya ingin konsultasi umroh.";
+      link.setAttribute("href", buildWhatsAppLink(text));
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener");
+    });
+
+    document.querySelectorAll(".tab-btn").forEach(function(button) {
+      button.addEventListener("click", function() {
+        const filter = button.getAttribute("data-filter");
+        document.querySelectorAll(".tab-btn").forEach(function(btn) {
+          btn.classList.remove("active");
+        });
+        button.classList.add("active");
+
+        document.querySelectorAll("#programGrid [data-category]").forEach(function(card) {
+          const category = card.getAttribute("data-category");
+          if (filter === "all" || category === filter) {
+            card.classList.remove("hidden");
+          } else {
+            card.classList.add("hidden");
+          }
+        });
+      });
+    });
+
+    document.querySelectorAll(".faq button").forEach(function(button) {
+      button.addEventListener("click", function() {
+        const faq = button.closest(".faq");
+        const content = faq.querySelector(".faq-content");
+        const isOpen = faq.classList.contains("active");
+
+        document.querySelectorAll(".faq").forEach(function(item) {
+          item.classList.remove("active");
+          item.querySelector(".faq-content").style.maxHeight = null;
+        });
+
+        if (!isOpen) {
+          faq.classList.add("active");
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+      });
+    });
+
+    const backTop = document.getElementById("backTop");
+    window.addEventListener("scroll", function() {
+      if (window.scrollY > 560) {
+        backTop.classList.add("show");
+      } else {
+        backTop.classList.remove("show");
+      }
+    });
+
+    backTop.addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
